@@ -1,23 +1,25 @@
+'using strict';
+
 // callback hell in async code
 
 const fs = require('fs');
 const superagent = require('superagent');
 const { reject } = require('superagent/lib/request-base');
 
-// fs.readFile(`${__dirname}/dog.txt`, (err, data) => {
-//   console.log(`Breed :  ${data}`);
-//   superagent
-//     .get(`https://dog.ceo/api/breed/${data}/images/random`)
-//     .end((err, res) => {
-//       if (err) return console.log(err.message);
-//       console.log(res.body.message);
-//       //  agian call back write
+fs.readFile(`${__dirname}/dog.txt`, (err, data) => {
+  console.log(`Breed :  ${data}`);
+  superagent
+    .get(`https://dog.ceo/api/breed/${data}/images/random`)
+    .end((err, res) => {
+      if (err) return console.log(err.message);
+      console.log(res.body.message);
+      //  agian call back write
 
-//       fs.writeFile('dog-img.txt', res.body.message, (err) => {
-//         console.log('Random dog image saved to file!');
-//       });
-//     });
-// });
+      fs.writeFile('dog-img.txt', res.body.message, (err) => {
+        console.log('Random dog image saved to file!');
+      });
+    });
+});
 
 // solved by the promiss
 
@@ -89,19 +91,43 @@ readFilePro(`${__dirname}/dog.txt`)
 const getDogPic = async () => {
   try {
     const data = await readFilePro(`${__dirname}/dog.txt`);
-    console.log(`Breed :  ${data}`);
+    console.log(`Breed : ${data}`);
 
-    const res = await superagent.get(
-      `https://dog.ceo/api/breed/${data}/images/random`,
-    );
+    const res = await superagent.get(`https://dog.ceo{data}/images/random`);
     console.log(res.body.message);
 
     await writeFilePro('dog-img1.txt', res.body.message);
+    console.log('Random dog image saved to file');
 
-    console.log('Random dog image saved to file ');
+    return 'Ready to load Dog Pic🐶';
   } catch (err) {
-    console.log(err.message);
+    throw err; // Error ko throw karein taaki bahar catch ho sake
   }
 };
 
-getDogPic();
+// Top-level Async Function (Safe and Clean)
+(async () => {
+  try {
+    console.log('1 : will Get Dog pics ...');
+    const res = await getDogPic();
+    console.log(res);
+    console.log('2 : Done getting dog pics!');
+  } catch (err) {
+    console.log('ERROR 💥');
+  }
+})();
+
+
+// =====================================================
+
+// --- The IIFE (Immediately Invoked Function Expression) ---
+(async () => {
+  try {
+    console.log('1: Starting image fetch...');
+    const result = await getDogPics();
+    console.log(result);
+    console.log('2: All done!');
+  } catch (err) {
+    console.log('ERROR 💥: Something went wrong!');
+  }
+})();
