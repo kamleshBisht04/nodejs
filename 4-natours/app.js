@@ -1,20 +1,34 @@
 const fs = require('fs');
 const express = require('express');
+const morgan = require('morgan');
 
 const app = express();
+
+// MIDDLEWERE
 app.use(express.json());
+app.use(morgan('dev'));
 
 app.use((req, res, next) => {
   console.log('Hello this is from middlewere......');
+  next();
+});
+
+app.use((req, res, next) => {
+  req.requestedTime = new Date().toISOString();
+  next();
 });
 
 const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`),
 );
 
+// ROUTE HANDLER
+
 const getAllTours = (req, res) => {
+  console.log(req.requestedTime);
   res.status(200).json({
     status: 'success',
+    requestedAt: req.requestedTime,
     result: tours.length,
     data: {
       tours: tours,
@@ -110,8 +124,44 @@ const deleteTour = (req, res) => {
   });
 };
 
-//  CRUD OPERATION IN CHANING
+// User Route handlere
 
+const getAllUsers = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This message is not define..',
+  });
+};
+
+const createUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This message is not define..',
+  });
+};
+
+const getUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This message is not define..',
+  });
+};
+
+const updateUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This message is not define..',
+  });
+};
+
+const deleteUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This message is not define..',
+  });
+};
+
+// ROUTE CRUD OPERATION TOUR IN CHANING
 app.route(`/api/v1/tours`).get(getAllTours).post(createTour);
 app
   .route(`/api/v1/tours/:id`)
@@ -119,6 +169,17 @@ app
   .patch(updateTour)
   .delete(deleteTour);
 
+// ROUTE CRUD OPERATION USERS IN CHANING
+
+app.route('/api/v1/users').get(getAllUsers).post(createUser);
+
+app
+  .route('/api/v1/users/:id')
+  .get(getUser)
+  .patch(updateUser)
+  .delete(deleteUser);
+
+// START SERVER
 const port = 3000;
 app.listen(port, () => {
   console.log(`App Running on port no ${port}...`);
