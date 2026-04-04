@@ -6,8 +6,9 @@ const userRouter = require('./routes/userRoutes');
 const app = express();
 
 // MIDDLEWERE
-app.use(express.json());
 app.use(morgan('dev'));
+app.use(express.json());
+app.use(express.static(`${__dirname}/public`));
 
 app.use((req, res, next) => {
   console.log('Hello this is from middlewere......');
@@ -23,8 +24,8 @@ app.use((req, res, next) => {
 app.use(`/api/v1/tours`, tourRouter);
 app.use(`/api/v1/users`, userRouter);
 
-
 module.exports = app;
+
 // ===========================================================
 // app.get('/', (req, res) => {
 //   res.status(200).json({
