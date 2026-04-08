@@ -32,3 +32,12 @@ exports.deleteUser = (req, res) => {
     message: 'This message is not define..',
   });
 };
+
+
+
+exports.deleteUser1 = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This message is not define..',
+  });
+};
