@@ -35,9 +35,4 @@ exports.deleteUser = (req, res) => {
 
 
 
-exports.deleteUser1 = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'This message is not define..',
-  });
-};
+
