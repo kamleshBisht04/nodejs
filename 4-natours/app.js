@@ -14,15 +14,6 @@ if (process.env.NODE_ENV === 'development') {
 app.use(express.json());
 app.use(express.static(`${__dirname}/public`));
 
-app.use((req, res, next) => {
-  console.log('Hello this is from middlewere......');
-  next();
-});
-
-app.use((req, res, next) => {
-  req.requestedTime = new Date().toISOString();
-  next();
-});
 
 //  mounting the routes
 app.use(`/api/v1/tours`, tourRouter);
