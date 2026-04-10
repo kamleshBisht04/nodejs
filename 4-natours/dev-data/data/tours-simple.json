@@ -282,5 +282,20 @@
     "imageCover": "tour-19-cover.jpg",
     "images": ["tour-19-1.jpg", "tour-19-2.jpg"],
     "startDates": ["2026-11-05", "2026-12-10"]
+  },
+  {
+    "id": 19,
+    "name": "Lakshadweep Island Tour",
+    "duration": 5,
+    "maxGroupSize": 10,
+    "difficulty": "easy",
+    "ratingsAverage": 4.8,
+    "ratingsQuantity": 55,
+    "price": 1399,
+    "summary": "Explore untouched islands and beaches.",
+    "description": "Enjoy crystal clear waters, coral reefs, and peaceful island life in Lakshadweep.",
+    "imageCover": "tour-19-cover.jpg",
+    "images": ["tour-19-1.jpg", "tour-19-2.jpg"],
+    "startDates": ["2026-11-05", "2026-12-10"]
   }
 ]
