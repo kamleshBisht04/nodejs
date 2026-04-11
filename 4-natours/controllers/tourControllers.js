@@ -7,18 +7,24 @@ exports.getAllTours = async (req, res) => {
     const excludedFields = ['sort', 'page', 'limit', 'fields'];
     excludedFields.forEach((el) => delete queryObj[el]);
 
-    //1B) ADVANCED FILTERING
+    //1B) Advance filtering
     let queryStr = JSON.stringify(queryObj);
     queryStr = queryStr.replace(/\b(lt|lte|gt|gte)\b/g, (match) => `$${match}`);
     let query = Tour.find(JSON.parse(queryStr));
 
-    //SORTTING
-
+    //2)Sorting
     if (req.query.sort) {
       const sortBy = req.query.sort.split(',').join(' ');
       query.sort(sortBy);
     } else {
       query.sort('createdAt');
+    }
+    // Field Limiting
+    if (req.query.fields) {
+      const fields = req.query.fields.split(',').join(' ');
+      query = query.select(fields);
+    } else {
+      query = query.select('-__v');
     }
 
     //EXECUT QUERY
