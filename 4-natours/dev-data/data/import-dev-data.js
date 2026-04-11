@@ -32,6 +32,7 @@ const importData = async () => {
   } catch (err) {
     console.log(err);
   }
+  process.exit();
 };
 
 // DELETE ALL DATA FROM DB..
@@ -42,12 +43,13 @@ const deleteData = async () => {
   } catch (err) {
     console.log(err);
   }
+  process.exit();
 };
 
 // deleteData();
 // importData();
 
-// through cmd this will return the array of argument 
+// through cmd this will return the array of argument
 console.log(process.argv);
 
 if (process.argv[2] === '--importData') {
