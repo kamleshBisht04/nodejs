@@ -38,6 +38,7 @@ const tourSchema = mongoose.Schema({
     type: Number,
     required: [true, 'A tour must have a price'],
   },
+  priceDiscount: Number,
   summary: {
     type: String,
     trim: true,
@@ -53,6 +54,11 @@ const tourSchema = mongoose.Schema({
   },
 
   images: [String], // array of strings
+
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+  },
 
   startDates: [Date], // array of dates
 });
