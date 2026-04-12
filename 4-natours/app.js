@@ -1,13 +1,13 @@
 const express = require('express');
 const morgan = require('morgan');
-const qs = require('qs');
+// const qs = require('qs');
 
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
 const app = express();
 
 // Set a custom query parser using qs
-app.set('query parser', (str) => qs.parse(str));
+// app.set('query parser', (str) => qs.parse(str));
 
 
 // MIDDLEWERE
